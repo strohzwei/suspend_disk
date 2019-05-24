@@ -27,3 +27,21 @@ inotify-tools
 - you may have to increase watches use:  echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf                                                                                                   
 - the smartd service may have to be changed or deactivated use: systemctl disable smartd
 - the gnome file tracker-store may wack up the drive
+
+# Install
+- move the script e.g. to /sbin/suspend_disk
+- edit crontap as root
+
+```
+sudo cp -v suspend_disk.sh /sbin/suspendisk_disk.sh
+sudo chmod +x /sbin/suspend_disk
+sudo crontab -e
+```
+
+## crontab example
+```
+PATH=/sbin:/usr/sbin:/usr/local/sbin:/root/bin:/usr/local/bin:/usr/bin:/bin
+SHELL=/bin/bash
+HOME=/root
+@reboot suspend_disk -p /mnt -d /dev/sda >> somelog.sda.log 2>/dev/null
+```
