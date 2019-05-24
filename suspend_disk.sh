@@ -154,10 +154,16 @@ name=${MOUNT_PATH##*/}
 access_info_fifo="/dev/shm/$name"
 suspend_time=$(($SUSPEND_AFTER_TIME_M * 60))
 echo "set $DEVICE to sleep after "$suspend_time"s with no activity in mountpoint $MOUNT_PATH" >&2
-echo "" > $access_info_fifo
 
-inotifywait -m -r $MOUNT_PATH > $access_info_fifo &
-
+START_MONITOR() {
+	echo "" > $access_info_fifo
+	inotifywait -m -r $MOUNT_PATH > $access_info_fifo &
+	INOTIFY_PID=$!
+}
+STOP_MONITOR() {
+	kill $INOTIFY_PID
+}
+START_MONITOR
 sleep 10
 echo "DATE, CURRENT_ACTIVE_STATE, DRIVE_ACTIVE_BUT_NO_FS_INTERACTION_S, CMD_TO_STANDBY_AFTER_S, COUNT_CMD_STANDBY" >&2
 COUNT=0
@@ -189,6 +195,8 @@ do
 		if $SPIN_TRIGGER_EVENT; then
 			SPIN_TRIGGER_EVENT=false
 			eval "$SPIN_UP_EVENT_CMD"
+			STOP_MONITOR
+			START_MONITOR
 		fi
 	else
 		echo $(date '+%Y-%m-%d %H:%M:%S')",0,"$SECONDS","$suspend_time","$COUNT
