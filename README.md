@@ -1,7 +1,7 @@
 # suspend_disk
 If hdparm does not work again.
 
-I have often had the problem that hdparm does not automatically put the hard disk into sleep mode. This script is supposed to help.
+I had often the problem that hdparm does not automatically put the hard disk into sleep mode. This script is supposed to help.
 
 # Dependencies
 ```
