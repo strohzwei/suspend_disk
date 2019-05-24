@@ -1,9 +1,9 @@
-# suspend_disk
+# suspend disk
 If hdparm does not work again.
 
 I had often the problem that hdparm does not automatically put the hard disk into sleep mode. This script is supposed to help.
 
-# Dependencies
+# Dependencies:
 ```
 inotify-tools
 ```
@@ -28,7 +28,7 @@ inotify-tools
 - the smartd service may have to be changed or deactivated use: systemctl disable smartd
 - the gnome file tracker-store may wack up the drive
 
-# Install
+# Install:
 - move the script e.g. to /sbin/suspend_disk
 - edit crontap as root
 
