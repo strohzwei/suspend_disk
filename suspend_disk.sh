@@ -93,6 +93,11 @@ while getopts ":t:p:d:o:ma:s:h" opt; do
 done
 shift $((OPTIND -1))
 
+if [ "$EUID" -ne 0 ]; then
+	echo "Please run this script as root."
+	exit 1
+fi
+
 if [ $SUSPEND_AFTER_TIME_M -lt 1 ]; then
 	echo "The suspend time was set under one minute."
 	echo "Beware, too many parking operations are unhealthy for the hard drive."
