@@ -33,7 +33,7 @@ inotify-tools
 - edit crontap as root
 
 ```
-sudo cp -v suspend_disk.sh /sbin/suspendisk_disk.sh
+sudo cp -v suspend_disk.sh /sbin/suspend_disk
 sudo chmod +x /sbin/suspend_disk
 sudo crontab -e
 ```
