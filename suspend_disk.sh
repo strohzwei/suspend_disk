@@ -135,6 +135,20 @@ if [[ $(which inotifywait) == "" ]]; then
 	display_help
 	exit 1
 fi
+if [[ $(which hdparm) == "" ]]; then
+	echo "hdparm is not installed. Please install hdparm."
+	echo "Aborted."
+	echo 
+	display_help
+	exit 1
+fi
+if [[ $(which smartctl) == "" ]]; then
+	echo "smartctl is not installed. Please install smartmontools."
+	echo "Aborted."
+	echo 
+	display_help
+	exit 1
+fi
 
 # Here you can choose one return of desire
 GET_STATE_OF_DRIVE() {
