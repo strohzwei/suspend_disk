@@ -5,7 +5,7 @@ I had often the problem that hdparm does not automatically put the hard disk int
 
 # Dependencies:
 ```
-inotify-tools
+apt install inotify-tools
 ```
 
 # Usage:
